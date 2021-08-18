@@ -1,0 +1,81 @@
+ALTER TABLE `[DBTP]answers`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]file_upload`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]follows_rules`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]functions`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]groups`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]likes_rules`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]logs`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]notifications`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci,
+  ADD UNIQUE KEY `id` (`id`);
+
+ALTER TABLE `[DBTP]questions`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]tags`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]awards`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+  
+ALTER TABLE `[DBTP]users`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]answers`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]file_upload`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]follows_rules`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]functions`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ ALTER TABLE `[DBTP]groups`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]likes_rules`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]logs`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]notifications`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]questions`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]tags`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `[DBTP]awards`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+  
+ALTER TABLE `[DBTP]users`  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+UPDATE `[DBTP]functions` SET `value` ='a:11:{s:9:"site_name";s:19:"Pearls! quora clone";s:16:"site_description";s:21:"Questions and Answers";s:13:"site_keywords";s:23:"Questions,Answers,Quora";s:11:"site_status";s:1:"1";s:9:"site_lang";s:7:"English";s:11:"closure_msg";s:48:"Site closed for maintenance.. please stay tuned!";s:8:"url_type";s:4:"slug";s:10:"q_approval";s:1:"0";s:10:"a_approval";s:1:"0";s:9:"reg_group";s:1:"3";s:13:"public_access";s:1:"1";}' WHERE 'function' = 'general_settings' ;
+
+CREATE TABLE IF NOT EXISTS `[DBTP]reports` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `obj_id` int(11) NOT NULL,
+  `obj_type` varchar(30) NOT NULL,
+  `report_date` datetime NOT NULL,
+  `info` varchar(300) NOT NULL,
+  `result` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `[DBTP]reports`ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `[DBTP]reports` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `[DBTP]tags` ADD `description` TEXT NOT NULL AFTER `follows`;
+
+ALTER TABLE `[DBTP]tags` ADD `avatar` INT(11) NOT NULL AFTER `description`;
+
+INSERT INTO `[DBTP]functions` (`function`, `value`, `msg`) 
+SELECT * FROM (SELECT 'admanager1', '&nbsp;', '') AS tmp
+WHERE NOT EXISTS (
+    SELECT `function` FROM `[DBTP]functions` WHERE `function` = 'admanager1'
+) LIMIT 1;
+INSERT INTO `[DBTP]functions` (`function`, `value`, `msg`) 
+SELECT * FROM (SELECT 'admanager2', '&nbsp;', '') AS tmp
+WHERE NOT EXISTS (
+    SELECT `function` FROM `[DBTP]functions` WHERE `function` = 'admanager2'
+) LIMIT 1;
+
+ALTER TABLE `[DBTP]users` ADD `username` VARCHAR(99) NOT NULL AFTER `avatar`;
